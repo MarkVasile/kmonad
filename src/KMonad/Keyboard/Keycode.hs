@@ -292,8 +292,8 @@ data Keycode
   | KeyBrightnessZero
   | KeyDisplayOff
   | KeyWimax
-  | Missing247
   | Missing248
+  | KeyMicMute
   | Missing249
   | Missing250
   | Missing251
@@ -301,15 +301,12 @@ data Keycode
   | Missing253
   | Missing254
   | Missing255
-#ifdef darwin_HOST_OS
   | KeyFn
   | KeyLaunchpad
   | KeyMissionCtrl
   | KeySpotlight
   | KeyDictation
-#endif
   deriving (Eq, Show, Bounded, Enum, Ord, Generic, Hashable)
-
 
 instance Display Keycode where
   textDisplay c = (\t -> "<" <> t <> ">") . fromMaybe (tshow c)
@@ -357,6 +354,7 @@ aliases = Q.mkMultiMap
   , (KeyMinus,          ["min", "-"])
   , (KeyEqual,          ["eql", "="])
   , (KeySleep,          ["zzz"])
+  , (KeyMicMute,        ["micm"])
   , (KeySpace,          ["spc"])
   , (KeyPageUp,         ["pgup"])
   , (KeyPageDown,       ["pgdn"])
@@ -366,6 +364,9 @@ aliases = Q.mkMultiMap
   , (KeyVolumeDown,     ["voldwn", "vold"])
   , (KeyBrightnessUp,   ["brup", "bru"])
   , (KeyBrightnessDown, ["brdown", "brdwn", "brdn"])
+  , (KeyMenu,           ["mn", "menu"])
+  , (KeyScale,          ["scl", "zoom"])
+  , (KeySearch,         ["src", "find"])
   , (KeyLeftAlt,        ["lalt", "alt"])
   , (KeyRightAlt,       ["ralt"])
   , (KeyCompose,        ["comp", "cmps", "cmp"])
@@ -408,10 +409,9 @@ aliases = Q.mkMultiMap
   , (KeyNextSong,       ["next"])
   , (KeyPlayPause,      ["pp"])
   , (KeyPreviousSong,   ["prev"])
-#ifdef darwin_HOST_OS
+  , (KeyFn,             ["fn"])
   , (KeyLaunchpad,      ["lp"])
   , (KeyMissionCtrl,    ["mctl"])
   , (KeySpotlight,      ["spot"])
   , (KeyDictation,      ["dict"])
-#endif
   ]
